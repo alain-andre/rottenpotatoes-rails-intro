@@ -12,8 +12,9 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.get_ratings
-    @sort_by = params[:sort_by]
-    @movies = Movie.all.order params[:sort_by]
+    @sort_by = params[:sort_by] != nil ? params['sort_by'] : nil
+    @ratings = params[:ratings] != nil ? params['ratings'] : Array.new()
+    @movies = Movie.get_all params
   end
 
   def new
